@@ -6,7 +6,7 @@
 /*   By: jleal <jleal@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 17:48:24 by jleal             #+#    #+#             */
-/*   Updated: 2025/05/31 19:02:10 by jleal            ###   ########.fr       */
+/*   Updated: 2025/06/02 16:40:29 by jleal            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,17 +41,19 @@ static void	handler(int sig, siginfo_t *info)
 	ft_kill(client, SIGUSR1);
 }
 
-int main(int ac, char **av)
+int	main(int ac, char **av)
 {
 	if (ac != 1 || !av)
 	{
-		write(2, "No arguments!", 14);
+		write(2, "No arguments!", 13);
 		return (EXIT_FAILURE);
 	}
-	printf("Server PID: %d\n", getpid());
+	write(1, "Server PID: ", 12);
+	ft_putnbr(getpid());
+	write(1, "\n", 1);
 	ft_signal(SIGUSR1, handler, 1);
 	ft_signal(SIGUSR2, handler, 1);
 	while (1)
 		pause();
-	return(EXIT_SUCCESS);
+	return (EXIT_SUCCESS);
 }

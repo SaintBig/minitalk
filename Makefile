@@ -1,5 +1,6 @@
 NAME_SERVER = server
 NAME_CLIENT = client
+NAME		= $(NAME_CLIENT) $(NAME_SERVER)
 
 SRC_SERVER = server.c mini_utils.c
 SRC_CLIENT = client.c mini_utils.c
@@ -10,7 +11,7 @@ OBJ_CLIENT = $(SRC_CLIENT:.c=.o)
 CC = cc
 CFLAGS = -Wall -Werror -Wextra
 
-all: $(NAME_SERVER) $(NAME_CLIENT)
+all: $(NAME)
 
 $(NAME_SERVER): $(OBJ_SERVER)
 	$(CC) $(CFLAGS) $(OBJ_SERVER) -o $(NAME_SERVER)

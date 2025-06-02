@@ -6,7 +6,7 @@
 /*   By: jleal <jleal@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 16:47:36 by jleal             #+#    #+#             */
-/*   Updated: 2025/05/31 19:01:27 by jleal            ###   ########.fr       */
+/*   Updated: 2025/06/02 16:52:47 by jleal            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ volatile sig_atomic_t	g_server = BUSY;
 
 static void	end_handler(void)
 {
-	write(1,"\nMessage received!\n", 20);
+	write(1, "Message received!\n", 18);
 	exit(EXIT_SUCCESS);
 }
 
@@ -51,8 +51,8 @@ int	main(int ac, char **av)
 
 	if (ac != 3)
 	{
-		write(2, "./client <server pid> \"message\"\n", 33);
-		return(EXIT_FAILURE);
+		write(2, "./client <server pid> \"message\"\n", 32);
+		return (EXIT_FAILURE);
 	}
 	server = atoi(av[1]);
 	message = av[2];

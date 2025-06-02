@@ -6,7 +6,7 @@
 /*   By: jleal <jleal@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 17:20:12 by jleal             #+#    #+#             */
-/*   Updated: 2025/05/31 18:59:48 by jleal            ###   ########.fr       */
+/*   Updated: 2025/06/02 16:47:40 by jleal            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,11 @@
 # define MINITALK_H
 # define _GNU_SOURCE
 
-# include <stdio.h>
-# include <errno.h>
-# include <string.h>
+//# include <errno.h>
 # include <stdlib.h>
 # include <unistd.h>
 # include <signal.h>
 # include <limits.h>
-# include <stdbool.h>
 # include <sys/types.h>
 # include <sys/signal.h>
 
@@ -29,6 +26,13 @@
 # define READY 1
 
 void	ft_signal(int sig, void *handler, int use_siginfo);
+
 void	ft_kill(pid_t pid, int signum);
+
+int		ft_atoi(const char *str);
+
+void	ft_putnbr(int n);
+
+void	*ft_memset(void *b, int c, size_t len);
 
 #endif
