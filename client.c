@@ -14,16 +14,14 @@
 
 volatile sig_atomic_t	g_server = BUSY;
 
-static void	end_handler(int sig)
+static void	end_handler(void)
 {
-	(void)sig;
-	write(1,"\n\tMessage received!\n", 21);
+	write(1,"\nMessage received!\n", 20);
 	exit(EXIT_SUCCESS);
 }
 
-static void	ack_handler(int sig)
+static void	ack_handler(void)
 {
-	(void)sig;
 	g_server = READY;
 }
 

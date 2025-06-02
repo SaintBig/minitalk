@@ -12,13 +12,12 @@
 
 #include "minitalk.h"
 
-static void	handler(int sig, siginfo_t *info, void *more_info)
+static void	handler(int sig, siginfo_t *info)
 {
 	static char		c = 0;
 	static int		bit = 0;
 	static pid_t	client = 0;
 
-	(void)more_info;
 	if (info->si_pid)
 		client = info->si_pid;
 	if (SIGUSR1 == sig)
