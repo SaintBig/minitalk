@@ -1,38 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minitalk.h                                         :+:      :+:    :+:   */
+/*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jleal <jleal@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/31 17:20:12 by jleal             #+#    #+#             */
-/*   Updated: 2025/06/03 12:20:28 by jleal            ###   ########.fr       */
+/*   Created: 2025/04/17 17:40:55 by jleal             #+#    #+#             */
+/*   Updated: 2025/04/26 19:39:16 by jleal            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINITALK_H
-# define MINITALK_H
-# define _GNU_SOURCE
+#ifndef FT_PRINTF_H
+# define FT_PRINTF_H
 
-# include <stdio.h>
-# include <stdlib.h>
+# include <stdarg.h>
 # include <unistd.h>
-# include <signal.h>
+# include <stdlib.h>
+# include <stdio.h>
 # include <limits.h>
-# include <sys/types.h>
-# include <sys/signal.h>
+# include <fcntl.h>
 
-# define BUSY 0
-# define READY 1
+int	ft_printf(const char *format, ...);
 
-void	ft_signal(int sig, void *handler, int use_siginfo);
+int	print_ptr(void *ptr);
 
-void	ft_kill(pid_t pid, int signum);
+int	ft_putnbr_base(long int nbr, char *base);
 
-int		ft_atoi(const char *str);
+int	ft_strlen_new(char *s);
 
-void	ft_putnbr(int n);
+int	ft_printchar(int c);
 
-void	*ft_memset(void *b, int c, size_t len);
+int	ft_printstr(char *str);
 
 #endif

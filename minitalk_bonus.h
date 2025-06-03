@@ -1,18 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minitalk.h                                         :+:      :+:    :+:   */
+/*   minitalk_bonus.h                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jleal <jleal@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/31 17:20:12 by jleal             #+#    #+#             */
-/*   Updated: 2025/06/03 12:20:28 by jleal            ###   ########.fr       */
+/*   Created: 2025/06/03 15:47:59 by jleal             #+#    #+#             */
+/*   Updated: 2025/06/03 16:26:43by jleal            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINITALK_H
-# define MINITALK_H
-# define _GNU_SOURCE
+#ifndef MINITALK_BONUS_H
+# define MINITALK_BONUS_H
+
+# define WAIT_US  100
 
 # include <stdio.h>
 # include <stdlib.h>
@@ -22,17 +23,17 @@
 # include <sys/types.h>
 # include <sys/signal.h>
 
-# define BUSY 0
-# define READY 1
+void	configure_sigaction_signals(struct sigaction *sa);
+void	send_int(pid_t pid, int num);
+void	send_char(pid_t pid, char c);
+void	send_bit(pid_t, char bit, char flag_to_pause);
 
-void	ft_signal(int sig, void *handler, int use_siginfo);
-
-void	ft_kill(pid_t pid, int signum);
-
-int		ft_atoi(const char *str);
-
-void	ft_putnbr(int n);
-
-void	*ft_memset(void *b, int c, size_t len);
+typedef struct s_protocol
+{
+	int		bits;
+	size_t	data;
+	int		flag;
+	char	*message;
+}			t_protocol;
 
 #endif

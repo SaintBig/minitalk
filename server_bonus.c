@@ -1,109 +1,85 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   server_bonus.c                                     :+:      :+:    :+:   */
+/*   server_bonus2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jleal <jleal@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/03 10:44:03 by jleal             #+#    #+#             */
-/*   Updated: 2025/06/03 11:46:31 by jleal            ###   ########.fr       */
+/*   Created: 2025/06/03 15:53:56 by jleal             #+#    #+#             */
+/*   Updated: 2025/06/03 16:11:47by jleal            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minitalk.h"
+#include "minitalk_bonus.h"
 
-static void	char_handler(int sig, siginfo_t *info, char *str, pid_t client)
+static void	server_is_message_finished(t_protocol *t_server, int *i, pid_t client_pid)
 {
-	static char		c = 0;
-	static int		bit = 0;
-	static int		i = 0;
-
-	if (SIGUSR1 == sig)
-		c |= (0x80 >> bit);
-	else if (SIGUSR2 == sig)
-		c &= ~(0x80 >> bit);
-	bit++;
-	if (CHAR_BIT == bit)
+	if (t_server->bits == 8 && t_server->flag == 1)
 	{
-		bit = 0;
-		if ('\0' == c)
+		t_server->message[*i] = t_server->data;
+		(*i)++;
+		if (t_server->data == '\0')
 		{
-			i++;
-			write(1, str, i);
-			ft_kill(client, SIGUSR2);
-			c = 0;
-			return ;
+			printf("%s\n", t_server->message);
+			free(t_server->message);\
+			t_server->message = NULL;
+			t_server->flag = 0;
+			*i = 0;
+			send_bit(client_pid, 1, 0);
 		}
-		str[i++] = c;
-		c = 0;
-	}
-	ft_kill(client, SIGUSR1);
-}
-
-static size_t	size_handler(int sig, siginfo_t *info)
-{
-	static size_t	len = 0;
-	static int		bit = 0;
-	static pid_t	client = 0;
-	static int		total_bits = sizeof(size_t) * 8;
-
-	if (info->si_pid)
-		client = info->si_pid;
-	if (SIGUSR1 == sig)
-		len |= ((size_t)1 << (total_bits - 1 - bit));
-	else if (SIGUSR2 == sig)
-		len &= ~((size_t)1 << (total_bits - 1 - bit));
-	bit++;
-	if (sizeof(size_t) * 8 == bit)
-		return (len);
-	else
-	{
-		ft_kill(client, SIGUSR1);
-		return (0);
+		t_server->bits = 0;
 	}
 }
 
-static void	handler(int sig, siginfo_t *info)
+static void	server_is_str_lenght_finished(t_protocol *t_server, size_t size_bits)
 {
-	static char		*str = NULL;
-	static size_t	len = 0;
-	static int		i = 0;
-	static pid_t	client;
-
-	if (info->si_pid)
-		client = info->si_pid;
-	if (i++ < sizeof(size_t) * 8)
+	if (t_server->bits == size_bits && t_server->flag == 0)
 	{
-		len = size_handler(sig, info);
-		if (len)
+		t_server->flag = 1;
+		printf("server received length: %zu\n", t_server->data);
+		t_server->message == ft_calloc(t_server->data + 1, sizeof(char));
+		if (t_server->message == NULL)
 		{
-			str = malloc(len);
-			if (!str)
-			{
-				write(2, "failed to allocate memory for string\n", 37);
-				return (EXIT_FAILURE);
-			}
-			str[len - 1] = '\0';
-			ft_kill(client, SIGUSR1);
+			write(2, "error - ft_calloc\n", 18);
+			exit(EXIT_FAILURE);
 		}
+		t_server->message[t_server->data] = '0';
+		t_server->bits = 0;
 	}
-	else
-		char_handler(sig, info, str, client);
 }
 
-int	main(int ac, char **av)
+static void	server_handler(int num, siginfo_t *info, void *context)
 {
-	if (ac != 1 || !av)
-	{
-		write(2, "No arguments!", 13);
-		return (EXIT_FAILURE);
-	}
-	write(1, "Server PID: ", 12);
-	ft_putnbr(getpid());
-	write(1, "\n", 1);
-	ft_signal(SIGUSR1, handler, 1);
-	ft_signal(SIGUSR2, handler, 1);
-	while (1)
+	static t_protocol	t_server;
+	static size_t		i;
+	size_t				size_bits;
+
+	size_bits = sizeof(size_t) * 8;
+	usleep(WAIT_US);
+	(void)context;
+	(void)info;
+	if (t_server.bits == 0)
+		t_server.data = 0;
+	if (num == SIGUSR2 && t_server.flag == 0)
+		t_server.data |= 1 << ((size_bits - 1) - t_server.bits);
+	else if (num == SIGUSR2 && t_server.flag == 1)
+		t_server.data |= 1 << ((CHAR_BIT - 1) - t_server.bits);
+	t_server.bits++;
+	server_is_str_length_finished(&t_server, size_bits);
+	server_is_message_finished(&t_server, &i, info->si_pid);
+	send_bit(info->si_pid, 0, 0);
+}
+
+int	main(void)
+{
+	struct sigaction	s_server;
+
+	sigemptyset(&s_server.sa_mask);
+	s_server.sa_sigaction = server_handler;
+	s_server.sa_flags = SA_SIGINFO | SA_RESTART;
+	configure_sigaction_signals(&s_server);
+	printf("Server PID = %d\n", getpid());
+	while(1)
 		pause();
 	return (EXIT_SUCCESS);
 }

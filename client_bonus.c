@@ -1,91 +1,58 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mini_bonus.c                                       :+:      :+:    :+:   */
+/*   client_bonus2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jleal <jleal@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/02 19:16:34 by jleal             #+#    #+#             */
-/*   Updated: 2025/06/02 19:46:39 by jleal            ###   ########.fr       */
+/*   Created: 2025/06/03 16:40:50 by jleal             #+#    #+#             */
+/*   Updated: 2025/06/03 17:12:30 by jleal            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minitalk.h"
+#include "minitalk_bonus.h"
 
-volatile sig_atomic_t	g_server = BUSY;
-
-static void	end_handler(void)
+static void	client_handler(int sig)
 {
-	write(1, "Message received!\n", 18);
-	exit(EXIT_SUCCESS);
-}
-
-static void	ack_handler(void)
-{
-	g_server = READY;
-}
-
-static void	send_char(char c, pid_t server)
-{
-	int	bit;
-
-	bit = 0;
-	while (bit < CHAR_BIT)
+	if (sig == SIGUSR2)
 	{
-		if (c & (0x80 >> bit))
-			ft_kill(server, SIGUSR1);
-		else
-			ft_kill(server, SIGUSR2);
-		bit++;
-		while (BUSY == g_server)
-			usleep(42);
-		g_server = BUSY;
+		printf("Message received!\n");
+		exit(EXIT_SUCCESS);
 	}
+	
 }
 
-static void	send_size(size_t len, pid_t server)
+static void	client_send_message(int server_pid, char *str)
 {
-	int bit;
-	int	total_bits;
+	int i;
 
-	total_bits = sizeof(size_t) * 8;
-	bit = 0;
-	while (bit < total_bits)
-	{
-		//calculate the mask for the current bit (from MSB to LSB)
-		size_t mask = (size_t)1 << (total_bits - 1 - bit);
-		if (len & mask)
-			ft_kill(server, SIGUSR1);
-		else
-			ft_kill(server, SIGUSR2);
-		bit++;
-		while(BUSY == g_server)
-			usleep(42);
-		g_server = BUSY;
-	}
+	i = 0;
+	printf("sending message length: %d\n", ft_strlen(str));
+	send_size(server_pid, ft_strlen(str));
+	printf("sending message...\n");
+	while (str[i] != '\0')
+		send_char(server_pid, str[i++]);
+	send_char(server_pid, '\0');
 }
 
-int	main(int ac, char **av)
+int main(int ac, char **av)
 {
-	pid_t	server;
-	char	*message;
-	int		i;
-	size_t	len;
+	struct sigaction	s_client;
 
 	if (ac != 3)
 	{
-		write(2, "./client <server pid> \"message\"\n", 32);
+		printf("incorrect format\n");
 		return (EXIT_FAILURE);
 	}
-	server = atoi(av[1]);
-	message = av[2];
-	len = strlen(message) + 1;
-	ft_signal(SIGUSR1, ack_handler, 0);
-	ft_signal(SIGUSR2, end_handler, 0);
-	i = 0;
-	send_size(len, server);
-	while (message[i])
-		send_char(message[i++], server);
-	send_char('\0', server);
-	return (EXIT_SUCCESS);
+	else if (kill(ft_atoi(av[1]), 0) < 0)
+	{
+		printf("Invalid PID\n");
+		return (EXIT_FAILURE);
+	}
+	sigemptyset(&s_client.sa_mask);
+	s_client.sa_flags = SA_RESTART;
+	s_client.sa_handler = client_handler;
+	configure_sigaction_signals(&s_client);
+	client_send_message(ft_atoi(av[1]), av[2]);
+	return(EXIT_SUCCESS);
 }
