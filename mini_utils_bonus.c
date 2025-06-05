@@ -6,7 +6,7 @@
 /*   By: jleal <jleal@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 16:58:15 by jleal             #+#    #+#             */
-/*   Updated: 2025/06/05 18:47:44 by jleal            ###   ########.fr       */
+/*   Updated: 2025/06/05 20:56:31 by jleal            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,16 @@ void	configure_sigaction_signals(struct sigaction *sa)
 
 void	send_int(pid_t pid, int num)
 {
-	
+	int		shift;
+	char	bit;
+
+	shift = (sizeof(int) * 8) - 1;
+	while (shift >= 0)
+	{
+		bit = (num >> shift) & 1;
+		send_bit(pid, bit, 1);
+		shift--;
+	}
 }
 
 void	send_char(pid_t pid, char c)
