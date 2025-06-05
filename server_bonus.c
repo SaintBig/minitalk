@@ -11,8 +11,10 @@
 /* ************************************************************************** */
 
 #include "minitalk_bonus.h"
+#include "./libft/libft.h"
+#include "./ft_printf/ft_printf.h"
 
-static void	server_is_message_finished(t_protocol *t_server, int *i, pid_t client_pid)
+static void	server_is_message_finished(t_protocol *t_server, size_t *i, pid_t client_pid)
 {
 	if (t_server->bits == 8 && t_server->flag == 1)
 	{
@@ -31,13 +33,13 @@ static void	server_is_message_finished(t_protocol *t_server, int *i, pid_t clien
 	}
 }
 
-static void	server_is_str_lenght_finished(t_protocol *t_server, size_t size_bits)
+static void	server_is_str_length_finished(t_protocol *t_server, int size_bits)
 {
 	if (t_server->bits == size_bits && t_server->flag == 0)
 	{
 		t_server->flag = 1;
 		printf("server received length: %zu\n", t_server->data);
-		t_server->message == ft_calloc(t_server->data + 1, sizeof(char));
+		t_server->message = calloc(t_server->data + 1, sizeof(char));
 		if (t_server->message == NULL)
 		{
 			write(2, "error - ft_calloc\n", 18);
@@ -52,7 +54,7 @@ static void	server_handler(int num, siginfo_t *info, void *context)
 {
 	static t_protocol	t_server;
 	static size_t		i;
-	size_t				size_bits;
+	int					size_bits;
 
 	size_bits = sizeof(size_t) * 8;
 	usleep(WAIT_US);

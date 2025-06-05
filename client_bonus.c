@@ -1,16 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   client_bonus2.c                                    :+:      :+:    :+:   */
+/*   client_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jleal <jleal@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 16:40:50 by jleal             #+#    #+#             */
-/*   Updated: 2025/06/03 17:12:30 by jleal            ###   ########.fr       */
+/*   Updated: 2025/06/05 18:44:49 by jleal            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk_bonus.h"
+#include "./libft/libft.h"
+#include "./ft_printf/ft_printf.h"
 
 static void	client_handler(int sig)
 {
@@ -27,8 +29,8 @@ static void	client_send_message(int server_pid, char *str)
 	int i;
 
 	i = 0;
-	printf("sending message length: %d\n", ft_strlen(str));
-	send_size(server_pid, ft_strlen(str));
+	printf("sending message length: %zu\n", ft_strlen(str));
+	send_int(server_pid, ft_strlen(str));
 	printf("sending message...\n");
 	while (str[i] != '\0')
 		send_char(server_pid, str[i++]);

@@ -12,6 +12,7 @@
 
 #ifndef MINITALK_BONUS_H
 # define MINITALK_BONUS_H
+# define _GNU_SOURCE
 
 # define WAIT_US  100
 

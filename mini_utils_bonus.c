@@ -6,7 +6,7 @@
 /*   By: jleal <jleal@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 16:58:15 by jleal             #+#    #+#             */
-/*   Updated: 2025/06/03 17:09:42 by jleal            ###   ########.fr       */
+/*   Updated: 2025/06/05 18:47:44 by jleal            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,11 @@ void	configure_sigaction_signals(struct sigaction *sa)
 		write(2, "Error initializing SIGUSR2\n", 27);
 		exit(EXIT_FAILURE);
 	}
+}
+
+void	send_int(pid_t pid, int num)
+{
+	
 }
 
 void	send_char(pid_t pid, char c)
