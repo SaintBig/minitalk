@@ -6,7 +6,7 @@
 /*   By: jleal <jleal@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 16:40:50 by jleal             #+#    #+#             */
-/*   Updated: 2025/06/06 16:42:00 by jleal            ###   ########.fr       */
+/*   Updated: 2025/06/06 17:24:09 by jleal            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,7 @@
 
 static void	client_handler(int sig)
 {
-	if (sig == SIGUSR1)
-	{
-		ft_putstr("\e[33m > ACK signal received from server\n\e[0m");
-	}
-	else if (sig == SIGUSR2)
+	if (sig == SIGUSR2)
 	{
 		ft_putstr("\e[92m > end of message signal received from server\n\e[0m");
 		exit(EXIT_SUCCESS);
@@ -35,10 +31,9 @@ static void	client_send_message(int server_pid, char *str)
 		ft_putnbr_fd(ft_strlen(str), STDOUT_FILENO);
 		ft_putstr("]\n\e[0m");
 		send_int(server_pid, ft_strlen(str));
-		ft_putstr("\e[92msending message\n\e[0m");
+		ft_putstr("\e[92msending message...\n\e[0m");
 		while (str[i] != '\0')
 			send_char(server_pid, str[i++]);
-		ft_putstr("\e[92msending null string terminator\n\e[0m");
 		send_char(server_pid, '\0');
 	}
 }
