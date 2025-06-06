@@ -6,7 +6,7 @@
 /*   By: jleal <jleal@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 09:28:35 by jleal             #+#    #+#             */
-/*   Updated: 2025/04/23 15:15:23 by jleal            ###   ########.fr       */
+/*   Updated: 2025/06/06 16:08:32 by jleal            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,36 +29,3 @@ char	*ft_strchr(const char *s, int c)
 		return ((char *)&s[i]);
 	return (NULL);
 }
-
-// TESTING AREA//
-/* static void test_ft_strchr(void) {
-	printf(YELLOW "\nTESTING ft_strchr()\n" RESET);
-
-	const char *str = "Hello World";
-	int c = 'o';
-	char *res1 = ft_strchr(str, c);
-	char *res2 = strchr(str, c);
-
-	if (res1 != res2) {
-		printf(RED "FAIL: ft_strchr(\"%s\", '%c') = %p, expected %p\n" RESET,
-			   str, c, (void *)res1, (void *)res2);
-		return;
-	}
-
-	// Test for non-existent character
-	c = 'z';
-	res1 = ft_strchr(str, c);
-	res2 = strchr(str, c);
-	if (res1 != res2) {
-		printf(RED "FAIL: ft_strchr(\"%s\", '%c') = %p, expected %p\n" RESET,
-			   str, c, (void *)res1, (void *)res2);
-		return;
-	}
-
-	printf(GREEN "ft_strchr: OK!\n" RESET);
-}
-
-int main(void)
-{
-	test_ft_strchr();
-}  */

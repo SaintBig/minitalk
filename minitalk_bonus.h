@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jleal <jleal@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/03 15:47:59 by jleal             #+#    #+#             */
-/*   Updated: 2025/06/03 16:26:43by jleal            ###   ########.fr       */
+/*   Created: 2025/06/06 16:40:52 by jleal             #+#    #+#             */
+/*   Updated: 2025/06/06 16:41:15 by jleal            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,18 @@
 # include <limits.h>
 # include <sys/types.h>
 # include <sys/signal.h>
+# include "./libft/libft.h"
+# include "./ft_printf/ft_printf.h"
 
 void	configure_sigaction_signals(struct sigaction *sa);
+
 void	send_int(pid_t pid, int num);
+
 void	send_char(pid_t pid, char c);
-void	send_bit(pid_t, char bit, char flag_to_pause);
+
+void	send_bit(pid_t pid, char bit, char flag_to_pause);
+
+void	ft_putstr(char *s);
 
 typedef struct s_protocol
 {

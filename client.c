@@ -6,7 +6,7 @@
 /*   By: jleal <jleal@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 16:47:36 by jleal             #+#    #+#             */
-/*   Updated: 2025/06/02 16:52:47 by jleal            ###   ########.fr       */
+/*   Updated: 2025/06/06 16:31:08 by jleal            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ volatile sig_atomic_t	g_server = BUSY;
 
 static void	end_handler(void)
 {
-	write(1, "Message received!\n", 18);
+	ft_putstr("\e[92m > end of message signal received from server\n\e[0m");
 	exit(EXIT_SUCCESS);
 }
 

@@ -6,7 +6,7 @@
 /*   By: jleal <jleal@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 09:02:15 by jleal             #+#    #+#             */
-/*   Updated: 2025/04/20 16:34:44 by jleal            ###   ########.fr       */
+/*   Updated: 2025/06/06 16:05:48 by jleal            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,20 +20,3 @@ int	ft_isalnum(int c)
 		return (1);
 	return (0);
 }
-// TESTING AREA//
-/* static void test_ft_isalnum(void) {
-	printf(YELLOW "\nTESTING ft_isalnum()\n" RESET);
-	for (int c = -1; c <= 255; c++) {
-		if ((ft_isalnum(c) != 0) != (isalnum(c) != 0)) {
-			printf(RED "FAIL: ft_isalnum(%d) = %d, expected %s\n" RESET,
-				   c, ft_isalnum(c), (isalnum(c) ? "non-zero" : "zero"));
-			return;
-		}
-	}
-	printf(GREEN "ft_isalnum: OK!\n" RESET);
-}
-
-int main(void)
-{
-	test_ft_isalnum();
-} */

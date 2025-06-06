@@ -6,7 +6,7 @@
 /*   By: jleal <jleal@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/12 17:25:45 by jleal             #+#    #+#             */
-/*   Updated: 2025/04/20 16:49:14 by jleal            ###   ########.fr       */
+/*   Updated: 2025/06/06 16:08:45 by jleal            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,26 +29,3 @@ char	*ft_strjoin(const char *s1, const char *s2)
 	ft_memcpy(str + l1, (const void *)s2, l2);
 	return (str);
 }
-
-// TESTING AREA//
-/* static void test_ft_strjoin(void) {
-	printf(YELLOW "\nTESTING ft_strjoin()\n\n" RESET);
-	char *s1 = "Hello, ";
-	char *s2 = "42!";
-	char *joined = ft_strjoin(s1, s2);
-	if (strcmp(joined, "Hello, 42!") != 0) {
-		printf(RED "FAIL: ft_strjoin(\"%s\", \"%s\") = \"%s\", 
-				expected \"Hello, 42!\"\n"
-				RESET, s1, s2, joined);
-		free(joined);
-		return;
-	}
-	printf(GREEN "Joined: %s\n\n" RESET, joined);
-	free(joined);
-	printf(GREEN "ft_strjoin: OK!\n" RESET);
-}
-
-int main(void)
-{
-	test_ft_strjoin();
-}  */

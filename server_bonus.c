@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   server_bonus2.c                                    :+:      :+:    :+:   */
+/*   server_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jleal <jleal@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/03 15:53:56 by jleal             #+#    #+#             */
-/*   Updated: 2025/06/03 16:11:47by jleal            ###   ########.fr       */
+/*   Created: 2025/06/06 16:39:12 by jleal             #+#    #+#             */
+/*   Updated: 2025/06/06 16:39:54 by jleal            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 #include "./libft/libft.h"
 #include "./ft_printf/ft_printf.h"
 
-static void	server_is_message_finished(t_protocol *t_server, size_t *i, pid_t client_pid)
+static void	server_is_message_finished(
+	t_protocol *t_server, size_t *i, pid_t client_pid)
 {
 	if (t_server->bits == 8 && t_server->flag == 1)
 	{
@@ -22,8 +23,10 @@ static void	server_is_message_finished(t_protocol *t_server, size_t *i, pid_t cl
 		(*i)++;
 		if (t_server->data == '\0')
 		{
-			printf("%s\n", t_server->message);
-			free(t_server->message);\
+			ft_putstr("\e[92mreceived message = [");
+			ft_putstr(t_server->message);
+			ft_putstr("]\n\e[0m");
+			free(t_server->message);
 			t_server->message = NULL;
 			t_server->flag = 0;
 			*i = 0;
@@ -38,14 +41,16 @@ static void	server_is_str_length_finished(t_protocol *t_server, int size_bits)
 	if (t_server->bits == size_bits && t_server->flag == 0)
 	{
 		t_server->flag = 1;
-		printf("server received length: %zu\n", t_server->data);
-		t_server->message = calloc(t_server->data + 1, sizeof(char));
+		ft_putstr("\e[92mreceived length = [");
+		ft_putnbr_fd(t_server->data, STDOUT_FILENO);
+		ft_putstr("]\n\e[0m");
+		t_server->message = ft_calloc(t_server->data + 1, sizeof(char));
 		if (t_server->message == NULL)
 		{
 			write(2, "error - ft_calloc\n", 18);
 			exit(EXIT_FAILURE);
 		}
-		t_server->message[t_server->data] = '0';
+		t_server->message[t_server->data] = '\0';
 		t_server->bits = 0;
 	}
 }
@@ -80,8 +85,10 @@ int	main(void)
 	s_server.sa_sigaction = server_handler;
 	s_server.sa_flags = SA_SIGINFO | SA_RESTART;
 	configure_sigaction_signals(&s_server);
-	printf("Server PID = %d\n", getpid());
-	while(1)
+	ft_putstr("\e[92mserver [PID = ");
+	ft_putnbr_fd(getpid(), STDOUT_FILENO);
+	ft_putstr("]\n\e[0m");
+	while (1)
 		pause();
 	return (EXIT_SUCCESS);
 }

@@ -6,7 +6,7 @@
 /*   By: jleal <jleal@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 17:48:24 by jleal             #+#    #+#             */
-/*   Updated: 2025/06/02 16:40:29 by jleal            ###   ########.fr       */
+/*   Updated: 2025/06/06 16:25:21 by jleal            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,9 @@ int	main(int ac, char **av)
 		write(2, "No arguments!", 13);
 		return (EXIT_FAILURE);
 	}
-	write(1, "Server PID: ", 12);
-	ft_putnbr(getpid());
-	write(1, "\n", 1);
+	ft_putstr("\e[92mserver [PID = ");
+	ft_putnbr_fd(getpid(), STDOUT_FILENO);
+	ft_putstr("]\n\e[0m");
 	ft_signal(SIGUSR1, handler, 1);
 	ft_signal(SIGUSR2, handler, 1);
 	while (1)

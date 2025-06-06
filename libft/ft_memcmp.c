@@ -6,7 +6,7 @@
 /*   By: jleal <jleal@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 09:32:20 by jleal             #+#    #+#             */
-/*   Updated: 2025/04/23 15:12:50 by jleal            ###   ########.fr       */
+/*   Updated: 2025/06/06 16:07:48 by jleal            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,27 +32,3 @@ int	ft_memcmp(const void *s1, const void *s2, size_t n)
 	}
 	return (0);
 }
-
-// TESTING AREA//
-/* static void test_ft_memcmp(void) {
-	printf(YELLOW "\nTESTING ft_memcmp()\n" RESET);
-
-	const char s1[] = "test";
-	const char s2[] = "test2";
-	size_t n = 4;
-	int res1 = ft_memcmp(s1, s2, n);
-	int res2 = memcmp(s1, s2, n);
-
-	if ((res1 < 0 && res2 < 0)
-		|| (res1 > 0 && res2 > 0)
-		|| (res1 == 0 && res2 == 0)) {
-		printf(GREEN "ft_memcmp: OK!\n" RESET);
-	} else {
-		printf(RED "FAIL: ft_memcmp() = %d, expected %d\n" RESET, res1, res2);
-	}
-}
-
-int main(void)
-{
-	test_ft_memcmp();
-}  */

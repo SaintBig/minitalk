@@ -6,7 +6,7 @@
 /*   By: jleal <jleal@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/13 20:27:51 by jleal             #+#    #+#             */
-/*   Updated: 2025/04/20 16:45:13 by jleal            ###   ########.fr       */
+/*   Updated: 2025/06/06 16:08:06 by jleal            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,20 +16,3 @@ void	ft_putchar_fd(char c, int fd)
 {
 	write(fd, &c, 1);
 }
-
-// TESTING AREA//
-/* static void test_ft_putchar_fd(void) {
-	printf(YELLOW "\nTESTING ft_putchar_fd():" RESET);
-	printf(BLUE "\n" RESET);
-
-	ft_putchar_fd('a', 1);
-	printf(BLUE "\n" RESET);
-	ft_putchar_fd('1', 2);
-
-	printf("\n");
-}
-
-int main(void)
-{
-	test_ft_putchar_fd();
-}  */

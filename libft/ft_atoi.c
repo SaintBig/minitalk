@@ -6,7 +6,7 @@
 /*   By: jleal <jleal@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/12 18:46:45 by jleal             #+#    #+#             */
-/*   Updated: 2025/04/23 15:13:29 by jleal            ###   ########.fr       */
+/*   Updated: 2025/06/06 16:05:16 by jleal            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,49 +44,3 @@ int	ft_atoi(const char *str)
 	}
 	return (tot * p);
 }
-
-// TESTING AREA//
-/* static void test_ft_atoi(void)
-{
-	printf(YELLOW "\nTESTING ft_atoi():\n" RESET);
-
-	struct {
-		char *input;
-		const int expected;
-	} test_cases[] = {
-		{"0", 0},
-		{"123", 123},
-		{"-456", -456},
-		{"2147483647", 2147483647},  // INT_MAX
-		{"-2147483648", -2147483648}, // INT_MIN
-		{"42", 42},
-		{"-99", -99}
-	};
-
-	int passed = 0;
-	int total = sizeof(test_cases) / sizeof(test_cases[0]);
-
-	for (int i = 0; i < total; i++)
-	{
-		int result = ft_atoi(test_cases[i].input);
-		printf("Test %d: ft_atoi(%s) -> ", i + 1, test_cases[i].input);
-
-		if (result == test_cases[i].expected)
-		{
-			printf(GREEN "PASS: \"%d\"\n" RESET, result);
-			passed++;
-		}
-		else
-		{
-			printf(RED "FAIL: got \"%d\", expected \"%d\"\n" RESET,
-					 result, test_cases[i].expected);
-		}
-	}
-
-	printf("Summary: %d/%d " GREEN "PASSED" RESET "\n", passed, total);
-}
-
-int main(void)
-{
-	test_ft_atoi();
-} */

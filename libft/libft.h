@@ -6,29 +6,12 @@
 /*   By: jleal <jleal@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/12 17:33:40 by jleal             #+#    #+#             */
-/*   Updated: 2025/04/23 15:57:18 by jleal            ###   ########.fr       */
+/*   Updated: 2025/06/06 16:09:49 by jleal            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
-
-// START OF TESTING AREA //
-/* 
-#include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
-#include <ctype.h>
-#include <fcntl.h>
-
-// Colors for printf
-#define RED "\033[1;31m"
-#define GREEN "\033[1;32m"
-#define YELLOW "\033[1;33m"
-#define BLUE "\033[1;34m"
-#define RESET "\033[0m"
- */
-// END OF TESTING AREA//
 
 # include <stdlib.h>
 # include <unistd.h>

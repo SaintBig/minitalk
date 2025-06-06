@@ -6,7 +6,7 @@
 /*   By: jleal <jleal@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 20:50:21 by jleal             #+#    #+#             */
-/*   Updated: 2025/05/09 20:43:26 by jleal            ###   ########.fr       */
+/*   Updated: 2025/06/06 16:04:56 by jleal            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,71 +74,3 @@ int	ft_printf(const char *format, ...)
 	va_end(args);
 	return (tot);
 }
-
-/* int	main(void)
-{
-	char c = 'A';
-	char *s = "Hello World!";
-	char *n = NULL;
-	int d = 42;
-	void *p = &d;
-	int tot = 0;
-	int tot2 = 0;
-
-	tot = printf("___printf\t%%c:\t%c\n", c);
-	ft_printf("total: %d\n", tot);
-	tot = ft_printf("ft_printf\t%%c:\t%c\n", c);
-	ft_printf("total: %d\n\n", tot);
-
-	tot = printf("___printf\t%%s:\t %s null: %s\n", s, n);
-	ft_printf("total: %d\n", tot);
-	tot = ft_printf("ft_printf\t%%s:\t %s null: %s\n", s, n);
-	ft_printf("total: %d\n\n", tot);
-
-	tot = printf("___printf\t%%p:\t %p null: %p\n", p, NULL);
-	ft_printf("total: %d\n", tot);
-	tot = ft_printf("ft_printf\t%%p:\t %p null: %p\n", p, NULL);
-	ft_printf("total: %d\n\n", tot);
-
-	tot = printf("___printf\t%%d:\t min( %d ) max( %d )\n", INT_MIN, INT_MAX);
-	ft_printf("total: %d\n", tot);
-	tot = ft_printf("ft_printf\t%%d:\t min( %d ) max( %d )\n", INT_MIN, INT_MAX);
-	ft_printf("total: %d\n\n", tot);
-
-	tot = printf("___printf\t%%i:\t min( %i ) max( %i )\n", INT_MIN, INT_MAX);
-	ft_printf("total: %d\n", tot);
-	tot = ft_printf("ft_printf\t%%i:\t min( %i ) max( %i )\n", INT_MIN, INT_MAX);
-	ft_printf("total: %d\n\n", tot);
-
-	tot = printf("___printf\t%%u:\t %u\n", UINT_MAX);
-	ft_printf("total: %d\n", tot);
-	tot = ft_printf("ft_printf\t%%u:\t %u\n", UINT_MAX);
-	ft_printf("total: %d\n\n", tot);
-
-	tot = printf("___printf\t%%xX:\t %x %X\n", -1, -1);
-	ft_printf("total: %d\n", tot);
-	tot = ft_printf("ft_printf\t%%xX:\t %x %X\n", -1, -1);
-	ft_printf("total: %d\n\n", tot);
-
-	printf("==EDGECASES==\n");
-	ft_printf("csdixXpu%");
-	ft_printf("\n");
-	//printf("csdixXpu%");
-	//ft_printf("\n");
-	ft_printf("%");
-	ft_printf("\n");
-	//printf("%");
-	//ft_printf("\n");
-	ft_printf("");
-	ft_printf("\n");
-	//printf("");
-	//ft_printf("\n");
-	ft_printf("closing terminal...\n\n");
-	int saved_stdout = dup(STDOUT_FILENO);
-	close(STDOUT_FILENO);
-	tot = ft_printf("%s\n", "closed the terminal!!");
-	tot2 = ft_printf("%s\n", "closed the terminal!!");
-	dup2(saved_stdout, STDOUT_FILENO);
-	printf("ft_printf returned %d\n", tot);
-	printf("   printf returned %d\n", tot);
-} */

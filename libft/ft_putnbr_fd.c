@@ -6,7 +6,7 @@
 /*   By: jleal <jleal@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 09:42:49 by jleal             #+#    #+#             */
-/*   Updated: 2025/04/20 16:45:28 by jleal            ###   ########.fr       */
+/*   Updated: 2025/06/06 16:08:15 by jleal            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,20 +30,3 @@ void	ft_putnbr_fd(int n, int fd)
 	else
 		ft_putchar_fd(n + '0', fd);
 }
-
-// TESTING AREA//
-/* static void test_ft_putnbr_fd(void) {
-	printf(YELLOW "\nTESTING ft_putnbr_fd():" RESET);
-	printf(BLUE "\n" RESET);
-
-	ft_putnbr_fd(1234, 1);
-	printf(BLUE "\n" RESET);
-	ft_putnbr_fd(4321, 2);
-
-	printf("\n");
-}
-
-int main(void)
-{
-	test_ft_putnbr_fd();
-} */
