@@ -6,7 +6,7 @@
 /*   By: jleal <jleal@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 16:47:36 by jleal             #+#    #+#             */
-/*   Updated: 2025/06/06 16:31:08 by jleal            ###   ########.fr       */
+/*   Updated: 2025/06/07 19:14:20 by jleal            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,12 @@ int	main(int ac, char **av)
 		write(2, "./client <server pid> \"message\"\n", 32);
 		return (EXIT_FAILURE);
 	}
-	server = atoi(av[1]);
+	server = ft_atoi(av[1]);
+	if (server < 1)
+	{
+		write(2, "Invalid PID\n", 12);
+		return (EXIT_FAILURE);
+	}
 	message = av[2];
 	ft_signal(SIGUSR1, ack_handler, 0);
 	ft_signal(SIGUSR2, end_handler, 0);

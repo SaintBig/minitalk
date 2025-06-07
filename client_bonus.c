@@ -6,7 +6,7 @@
 /*   By: jleal <jleal@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 16:40:50 by jleal             #+#    #+#             */
-/*   Updated: 2025/06/06 17:24:09 by jleal            ###   ########.fr       */
+/*   Updated: 2025/06/07 19:19:48 by jleal            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,11 @@ int	main(int ac, char **av)
 	if (ac != 3)
 	{
 		ft_printf("incorrect format\n");
+		return (EXIT_FAILURE);
+	}
+	if (ft_atoi(av[1]) < 1)
+	{
+		write(2, "Invalid PID\n", 12);
 		return (EXIT_FAILURE);
 	}
 	else if (kill(ft_atoi(av[1]), 0) < 0)

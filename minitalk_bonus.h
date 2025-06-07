@@ -6,7 +6,7 @@
 /*   By: jleal <jleal@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 16:40:52 by jleal             #+#    #+#             */
-/*   Updated: 2025/06/06 16:41:15 by jleal            ###   ########.fr       */
+/*   Updated: 2025/06/07 19:16:34 by jleal            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 
 # define WAIT_US  100
 
-# include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
 # include <signal.h>

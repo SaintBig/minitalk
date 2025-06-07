@@ -6,7 +6,7 @@
 /*   By: jleal <jleal@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 17:20:12 by jleal             #+#    #+#             */
-/*   Updated: 2025/06/06 16:41:24 by jleal            ###   ########.fr       */
+/*   Updated: 2025/06/07 19:16:46 by jleal            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define MINITALK_H
 # define _GNU_SOURCE
 
-# include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
 # include <signal.h>
